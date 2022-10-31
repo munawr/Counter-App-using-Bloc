@@ -1,90 +1,39 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_application_3/counter/counter_bloc.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+// main.dart file
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'SignInScreen.dart';
 
-Future<void> main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+// initializing the firebase app
   await Firebase.initializeApp();
-  runApp(const MyApp());
+
+// calling of runApp
+  runApp(GoogleSignIn());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
+class GoogleSignIn extends StatefulWidget {
+  GoogleSignIn({Key? key}) : super(key: key);
   @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => CounterBloc(),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter App',
-        theme: ThemeData(
-          primarySwatch: Colors.grey,
-        ),
-        home: const MyHomePage(title: 'Counter App'),
-      ),
-    );
-  }
+  _GoogleSignInState createState() => _GoogleSignInState();
 }
 
-class MyHomePage extends StatelessWidget {
-  final String title;
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
+class _GoogleSignInState extends State<GoogleSignIn> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
+    // we return the MaterialApp here ,
+    // MaterialApp contain some basic ui for android ,
+    return MaterialApp(
+      //materialApp title
+      title: 'GEEKS FOR GEEKS',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.green,
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Image.asset(
-              'assets/images/counter.jpg',
-              width: 600.0,
-              height: 240.0,
-            ),
-            const Text(
-              'Current Count',
-              style: TextStyle(
-                  height: 6, fontSize: 30, fontWeight: FontWeight.bold),
-            ),
-            BlocBuilder<CounterBloc, CounterState>(
-              builder: (context, state) {
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    FloatingActionButton(
-                      backgroundColor: const Color.fromARGB(255, 255, 54, 54),
-                      onPressed: () {
-                        context.read<CounterBloc>().add(Decrement());
-                      },
-                      tooltip: 'Decrement',
-                      child: const Icon(Icons.remove),
-                    ),
-                    Text(
-                      '${state.count}',
-                      style: const TextStyle(fontSize: 50),
-                    ),
-                    FloatingActionButton(
-                      backgroundColor: const Color.fromARGB(255, 61, 123, 255),
-                      onPressed: () {
-                        context.read<CounterBloc>().add(Increment());
-                      },
-                      tooltip: 'Increment',
-                      child: const Icon(Icons.add),
-                    ),
-                  ],
-                );
-              },
-            ),
-          ],
-        ),
-      ),
+
+      // home property contain SignInScreen widget
+      home: SignInScreen(),
     );
   }
 }
