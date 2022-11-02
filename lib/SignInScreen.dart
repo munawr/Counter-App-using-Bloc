@@ -75,7 +75,6 @@ Future<void> signup(BuildContext context) async {
         idToken: googleSignInAuthentication.idToken,
         accessToken: googleSignInAuthentication.accessToken);
 
-    // Getting users credential
     UserCredential result = await auth.signInWithCredential(authCredential);
     User? user = result.user;
 
@@ -86,7 +85,6 @@ Future<void> signup(BuildContext context) async {
               builder: (context) => MyHomePage(
                     title: 'Counter App',
                   )));
-    } // if result not null we simply call the MaterialpageRoute,
-    // for go to the HomePage screen
+    }
   }
 }

@@ -22,17 +22,15 @@ class GoogleSignIn extends StatefulWidget {
 class _GoogleSignInState extends State<GoogleSignIn> {
   @override
   Widget build(BuildContext context) {
-    // we return the MaterialApp here ,
-    // MaterialApp contain some basic ui for android ,
+    
     return MaterialApp(
-      //materialApp title
-      title: 'GEEKS FOR GEEKS',
+      
+      title: 'Counter App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
 
-      // home property contain SignInScreen widget
       home: SignInScreen(),
     );
   }
